@@ -1,0 +1,7 @@
+stringItem: hello
+numbers:
+ - 1
+ - 2
+ - 10
+map:
+  key: value

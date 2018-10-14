@@ -39,6 +39,11 @@ dependencies {
     compile "org.glassfish.jersey.inject:jersey-hk2:2.27"
     compile "org.eclipse.jetty:jetty-project:9.4.12.v20180830"
 
+    // Data serialization
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.7"
+    // Configuration management
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2"
+
     // Dependencies inject
     compile "com.google.inject:guice:4.2.1"
 

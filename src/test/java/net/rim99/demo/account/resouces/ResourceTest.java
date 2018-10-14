@@ -2,27 +2,32 @@ package net.rim99.demo.account.resouces;
 
 import io.restassured.RestAssured;
 import net.rim99.demo.account.startup.ServerManager;
+import net.rim99.demo.account.startup.config.ConfigManager;
+import net.rim99.demo.account.startup.config.data.ServerConfigData;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ResourceTest {
+class ResourceTest {
 
     private ServerManager manager;
 
     @BeforeAll
-    void setup() {
+    void setUp() {
         String uri = "http://localhost/";
-        int port = 9888;
+        int port = ConfigManager
+                .getManager()
+                .getConfig(ServerConfigData.class)
+                .getPort();
         RestAssured.baseURI = uri;
         RestAssured.port = port;
-        manager = new ServerManager( uri, port);
+        manager = new ServerManager();
         manager.start();
     }
 
     @AfterAll
-    void teardown() {
+    void tearDown() {
         manager.shutdown();
     }
 

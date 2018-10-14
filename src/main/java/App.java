@@ -6,7 +6,7 @@ import net.rim99.demo.account.startup.ServerManager;
 public class App {
 
     public static void main(String[] args) {
-        ServerManager startup = new ServerManager("http://localhost/", 9888);
+        ServerManager startup = new ServerManager();
         startup.start();
     }
 }
