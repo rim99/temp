@@ -6,10 +6,17 @@
  * user guide available at https://docs.gradle.org/4.3.1/userguide/tutorial_java_projects.html
  */
 
+buildscript {
+    dependencies {
+        classpath "mysql:mysql-connector-java:8.0.12"
+    }
+}
+
 plugins {
     id 'java' // Apply the java plugin to add support for Java
     id 'application' // Apply the application plugin to add support for building an application
     id 'idea' // optional (to generate IntelliJ IDEA project files)
+    id "org.flywaydb.flyway" version "5.2.0"
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -33,7 +40,10 @@ dependencies {
     compile "org.eclipse.jetty:jetty-project:9.4.12.v20180830"
 
     // Dependencies inject
-    //compile "com.google.inject:guice:4.2.12"
+    compile "com.google.inject:guice:4.2.1"
+
+    // Database related component
+    compile "mysql:mysql-connector-java:8.0.12"
 
     // Use JUnit test framework
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
@@ -42,6 +52,12 @@ dependencies {
 
     // Integration test
     testCompile "io.rest-assured:rest-assured:3.1.1"
+}
+
+flyway {
+    url = "jdbc:mysql://localhost:8801/account_test"
+    user = 'mysql'
+    password = 'mysql'
 }
 
 // Define the main class for the application
