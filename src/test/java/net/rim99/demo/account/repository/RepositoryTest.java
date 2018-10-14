@@ -1,30 +1,30 @@
 package net.rim99.demo.account.repository;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RepositoryTest {
 
-    private Connection conn;
+    static private Connection conn;
 
-    @BeforeAll
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://localhost:8801/account_test?" +
-                            "user=mysql&password=mysql");
+                    "user=mysql&password=mysql");
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException("Fail to establish database connectionu, detail: " + ex.getMessage());
         }
     }
 
-    @AfterAll
-    void tearDown() {
-
+    @AfterClass
+    public static void tearDown() throws SQLException {
+        conn.close();
     }
 }

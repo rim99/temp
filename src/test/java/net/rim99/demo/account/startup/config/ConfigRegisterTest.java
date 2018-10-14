@@ -1,21 +1,22 @@
 package net.rim99.demo.account.startup.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.Test;
 
-class ConfigRegisterTest {
+public class ConfigRegisterTest {
 
     class TestConfig extends Config { }
 
     @Test
-    void should_not_register_class_which_was_already_registered() {
+    public void should_not_register_class_which_was_already_registered() {
 
-        Class<? extends Config> configClass = TestConfig.class;
         ConfigRegister register = new ConfigRegister();
-        register.register("file_path_1", configClass);
+        register.register("file_path_1", TestConfig.class);
 
-        assertThrows(RuntimeException.class,
-                () -> register.register("file_path_2", configClass));
+
+        assertThat(catchThrowable(() ->
+                register.register("file_path_2", TestConfig.class)))
+                .matches(ex -> ex.getClass().equals(IllegalArgumentException.class), "Exception type is not match");
     }
 }

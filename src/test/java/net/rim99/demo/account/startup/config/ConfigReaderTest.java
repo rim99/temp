@@ -2,7 +2,7 @@ package net.rim99.demo.account.startup.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.rim99.demo.account.startup.config.impl.YamlConfigReader;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
@@ -10,10 +10,10 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class ConfigReaderTest {
+public class ConfigReaderTest {
 
     @Test
-    void should_create_bean_from_yaml_file() {
+    public void should_create_bean_from_yaml_file() {
         String testFile = "config/ConfigReaderTestConfig.yml";
         ConfigReader reader = new YamlConfigReader();
         TestBean testBean = reader.readFrom(testFile, TestBean.class);

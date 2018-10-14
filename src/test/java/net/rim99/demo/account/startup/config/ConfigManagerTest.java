@@ -1,17 +1,20 @@
 package net.rim99.demo.account.startup.config;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
-class ConfigManagerTest {
+public class ConfigManagerTest {
 
-    static class NotRegistered extends Config { }
+    static class NotRegistered extends Config {
+    }
 
     @Test
-    void should_throw_exception_when_class_is_not_registerd() {
+    public void should_throw_exception_when_class_is_not_registerd() {
         ConfigManager manager = ConfigManager.getManager();
-        assertThrows(RuntimeException.class,
-                () -> manager.getConfig(NotRegistered.class));
+        assertThat(catchThrowable(() ->
+                manager.getConfig(NotRegistered.class)))
+                .isInstanceOf(RuntimeException.class);
     }
 }
