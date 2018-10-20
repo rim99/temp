@@ -45,10 +45,12 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2"
 
     // Dependencies inject
-    compile "com.google.inject:guice:4.2.1"
+    compile "com.google.inject:guice:4.2.1" // used by mybatis
 
     // Database related component
     compile "mysql:mysql-connector-java:8.0.12"
+    compile "org.mybatis:mybatis:3.4.6"
+    compile "org.mybatis:mybatis-guice:3.10"
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'

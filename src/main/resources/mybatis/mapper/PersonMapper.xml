@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.rim99.demo.account.repository.mapper.PersonMapper">
+
+    <select id="getNameById" resultType="string">
+        SELECT name FROM PERSON WHERE id=#{id} LIMIT 1;
+    </select>
+
+    <insert id="add" keyProperty="id">
+        INSERT INTO PERSON (
+            id,
+            name
+        ) VALUES (
+            #{id},
+            #{name}
+        );
+    </insert>
+
+</mapper>

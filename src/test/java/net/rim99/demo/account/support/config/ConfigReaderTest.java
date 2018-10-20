@@ -1,7 +1,7 @@
-package net.rim99.demo.account.startup.config;
+package net.rim99.demo.account.support.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.rim99.demo.account.startup.config.impl.YamlConfigReader;
+import net.rim99.demo.account.support.config.impl.YamlConfigReader;
 import org.junit.Test;
 
 import java.util.List;

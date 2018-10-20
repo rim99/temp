@@ -1,4 +1,4 @@
-package net.rim99.demo.account.startup.config;
+package net.rim99.demo.account.support.config;
 
 import static org.assertj.core.api.Assertions.*;
 

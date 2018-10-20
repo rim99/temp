@@ -1,17 +1,17 @@
-package net.rim99.demo.account.startup.config;
+package net.rim99.demo.account.support.config;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class ConfigRegister {
+public class ConfigRegister {
     Map<String, String> configPaths;
 
-    ConfigRegister() {
+    public ConfigRegister() {
         this.configPaths = new HashMap<>();
     }
 
-    <T extends Config> void register(String filePath, Class<T> clazz) {
-        String key = clazz.getCanonicalName();
+    public <T extends Config> void register(String filePath, Class<T> clazz) {
+        String key = clazz.getName();
         String savedPath = configPaths.put(key, filePath);
         if (savedPath != null) {
             throw new IllegalArgumentException(

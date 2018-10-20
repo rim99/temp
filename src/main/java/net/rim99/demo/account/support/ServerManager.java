@@ -1,8 +1,9 @@
-package net.rim99.demo.account.startup;
+package net.rim99.demo.account.support;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.rim99.demo.account.resources.Hello;
-import net.rim99.demo.account.startup.config.ConfigManager;
-import net.rim99.demo.account.startup.config.data.ServerConfigData;
+import net.rim99.demo.account.support.config.Config;
+import net.rim99.demo.account.support.config.ConfigManager;
 import org.eclipse.jetty.server.Server;
 import org.glassfish.jersey.jetty.JettyHttpContainerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -19,9 +20,8 @@ public class ServerManager {
         this.uri = "http://localhost";
     }
 
-    public void start() {
-        ConfigManager manager = ConfigManager.getManager();
-        URI baseUri = UriBuilder.fromUri(uri).port(manager.getConfig(ServerConfigData.class).getPort()).build();
+    public void start(ConfigManager manager) {
+        URI baseUri = UriBuilder.fromUri(uri).port(manager.getConfig(Settings.class).getPort()).build();
         ResourceConfig config = new ResourceConfig(Hello.class);
         server = JettyHttpContainerFactory.createServer(baseUri, config);
     }
@@ -33,5 +33,23 @@ public class ServerManager {
             e.printStackTrace();
             throw new RuntimeException("Fail to shutdown, detail: " + e.getMessage());
         }
+    }
+
+    public static class Settings extends Config {
+
+        @JsonProperty
+        private int port;
+
+        public Settings() {
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
+
     }
 }

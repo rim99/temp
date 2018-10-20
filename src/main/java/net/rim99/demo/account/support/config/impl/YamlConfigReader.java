@@ -1,9 +1,9 @@
-package net.rim99.demo.account.startup.config.impl;
+package net.rim99.demo.account.support.config.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import net.rim99.demo.account.startup.config.Config;
-import net.rim99.demo.account.startup.config.ConfigReader;
+import net.rim99.demo.account.support.config.Config;
+import net.rim99.demo.account.support.config.ConfigReader;
 
 import java.io.BufferedReader;
 import java.io.File;

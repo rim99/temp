@@ -1,30 +1,23 @@
-package net.rim99.demo.account.startup.config;
+package net.rim99.demo.account.support.config;
 
-import net.rim99.demo.account.startup.config.data.ServerConfigData;
-import net.rim99.demo.account.startup.config.impl.YamlConfigReader;
+import net.rim99.demo.account.support.config.impl.YamlConfigReader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigManager {
 
-    private static ConfigRegister register() {
-        ConfigRegister register = new ConfigRegister();
-        register.register("config/Server.yml", ServerConfigData.class);
-        return register;
-    }
-
     private static ConfigManager manager = null;
 
-    public static ConfigManager getManager() {
+    public static synchronized void initialize(ConfigRegister register) {
         if (manager == null) {
-            synchronized (ConfigManager.class) {
-                if (manager == null) {
-                    manager = new ConfigManager(register());
-                    manager.prepare();
-                }
-            }
+            ConfigManager manager1 = new ConfigManager(register);
+            manager1.prepare();
+            manager = manager1;
         }
+    }
+
+    public static ConfigManager get() {
         return manager;
     }
 
@@ -52,7 +45,7 @@ public class ConfigManager {
 
     @SuppressWarnings("unchecked")
     public <T extends Config> T getConfig(Class<T> clazz) {
-        String key = clazz.getCanonicalName();
+        String key = clazz.getName();
         Object data = configCache.get(key);
         if (data != null) {
             return (T) data;

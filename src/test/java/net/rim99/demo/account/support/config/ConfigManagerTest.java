@@ -1,4 +1,4 @@
-package net.rim99.demo.account.startup.config;
+package net.rim99.demo.account.support.config;
 
 import org.junit.Test;
 
@@ -12,7 +12,8 @@ public class ConfigManagerTest {
 
     @Test
     public void should_throw_exception_when_class_is_not_registerd() {
-        ConfigManager manager = ConfigManager.getManager();
+        ConfigManager.initialize(net.rim99.demo.account.startup.Config.register());
+        ConfigManager manager = ConfigManager.get();
         assertThat(catchThrowable(() ->
                 manager.getConfig(NotRegistered.class)))
                 .isInstanceOf(RuntimeException.class);

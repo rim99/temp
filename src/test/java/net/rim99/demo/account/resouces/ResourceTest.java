@@ -1,9 +1,9 @@
 package net.rim99.demo.account.resouces;
 
 import io.restassured.RestAssured;
-import net.rim99.demo.account.startup.ServerManager;
-import net.rim99.demo.account.startup.config.ConfigManager;
-import net.rim99.demo.account.startup.config.data.ServerConfigData;
+import net.rim99.demo.account.startup.Config;
+import net.rim99.demo.account.support.ServerManager;
+import net.rim99.demo.account.support.config.ConfigManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -14,14 +14,14 @@ public class ResourceTest {
     @BeforeClass
     public static void setUp() {
         String uri = "http://localhost/";
-        int port = ConfigManager
-                .getManager()
-                .getConfig(ServerConfigData.class)
+        ConfigManager.initialize(Config.register());
+        int port = ConfigManager.get()
+                .getConfig(ServerManager.Settings.class)
                 .getPort();
         RestAssured.baseURI = uri;
         RestAssured.port = port;
         manager = new ServerManager();
-        manager.start();
+        manager.start(ConfigManager.get());
     }
 
     @AfterClass
