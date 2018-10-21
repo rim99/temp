@@ -6,12 +6,7 @@
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:8801/account_test?"/>
-                <property name="username" value="mysql"/>
-                <property name="password" value="mysql"/>
-            </dataSource>
+            <dataSource type="net.rim99.demo.account.support.repository.HikariCPDataSourceFactory"/>
         </environment>
     </environments>
     <mappers>

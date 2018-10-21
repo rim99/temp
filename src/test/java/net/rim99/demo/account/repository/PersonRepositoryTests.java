@@ -1,6 +1,6 @@
 package net.rim99.demo.account.repository;
 
-import net.rim99.demo.account.support.Repositories;
+import net.rim99.demo.account.support.repository.Repositories;
 import org.junit.Test;
 
 

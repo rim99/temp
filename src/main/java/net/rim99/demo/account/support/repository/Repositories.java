@@ -1,4 +1,4 @@
-package net.rim99.demo.account.support;
+package net.rim99.demo.account.support.repository;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -8,9 +8,9 @@ public class Repositories {
 
     private static Repositories factory;
 
-    public static synchronized void initializeFactory(AbstractModule module) {
+    public static synchronized void initializeFactory(AbstractModule mybatisModule) {
         if (factory != null) return;
-        factory = new Repositories(module);
+        factory = new Repositories(mybatisModule);
     }
 
     public static Repositories getFactory() {
