@@ -1,0 +1,34 @@
+Configuration:
+  status: warn
+  name: YAMLConfigTest
+  properties:
+    property:
+      name: filename
+      value: target/test-yaml.log
+  thresholdFilter:
+    level: debug
+  appenders:
+    Console:
+      name: STDOUT
+      PatternLayout:
+        Pattern: "%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    File:
+      name: File
+      fileName: ${filename}
+      PatternLayout:
+        Pattern: "%d %p %C{1.} [%t] %m%n"
+      Filters:
+        ThresholdFilter:
+          level: error
+
+  Loggers:
+    logger:
+      -
+        name: net.rim99.demo.account.repository.JdbcTest
+        level: trace
+        AppenderRef:
+          ref: STDOUT
+    Root:
+      level: info
+      AppenderRef:
+        ref: STDOUT
