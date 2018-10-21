@@ -17,7 +17,7 @@ public class Repositories {
         return factory;
     }
 
-    private final Injector injector;
+    final Injector injector;
 
     private Repositories(AbstractModule module) {
         this.injector = mybatisInjector(module);
@@ -27,7 +27,7 @@ public class Repositories {
         return Guice.createInjector(module);
     }
 
-    public <T> T get(Class<T> clazz) {
+    public <T extends Respository> T get(Class<T> clazz) {
         return injector.getInstance(clazz);
     }
 }
