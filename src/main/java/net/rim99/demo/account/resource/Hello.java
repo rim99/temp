@@ -1,4 +1,4 @@
-package net.rim99.demo.account.resources;
+package net.rim99.demo.account.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

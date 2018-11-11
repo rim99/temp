@@ -1,7 +1,6 @@
 package net.rim99.demo.account.support;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.rim99.demo.account.resources.Hello;
 import net.rim99.demo.account.support.config.Config;
 import net.rim99.demo.account.support.config.ConfigManager;
 import org.eclipse.jetty.server.Server;
@@ -20,10 +19,9 @@ public class ServerManager {
         this.uri = "http://localhost";
     }
 
-    public void start(ConfigManager manager) {
+    public void start(ConfigManager manager, ResourceConfig resourceConfig) {
         URI baseUri = UriBuilder.fromUri(uri).port(manager.getConfig(Settings.class).getPort()).build();
-        ResourceConfig config = new ResourceConfig(Hello.class);
-        server = JettyHttpContainerFactory.createServer(baseUri, config);
+        server = JettyHttpContainerFactory.createServer(baseUri, resourceConfig);
     }
 
     public void shutdown() {

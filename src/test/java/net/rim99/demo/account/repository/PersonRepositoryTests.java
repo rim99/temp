@@ -1,14 +1,19 @@
 package net.rim99.demo.account.repository;
 
-import net.rim99.demo.account.support.repository.Repositories;
+import net.rim99.demo.account.support.guice.GlobalInjector;
+import org.junit.Before;
 import org.junit.Test;
-
 
 import static org.junit.Assert.assertEquals;
 
 public class PersonRepositoryTests extends RepositoryTest{
 
-    PersonRepository personRepository = Repositories.getFactory().get(PersonRepository.class);
+    private PersonRepository personRepository;
+
+    @Before
+    public void setup() {
+        personRepository = GlobalInjector.getInstance(PersonRepository.class);
+    }
 
     @Test
     public void should_create_person() {

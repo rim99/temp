@@ -45,12 +45,13 @@ dependencies {
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2"
 
     // Dependencies inject
-    compile "com.google.inject:guice:4.2.1" // used by mybatis
+    compile "com.google.inject:guice:4.1.0"
+    compile "org.glassfish.hk2:guice-bridge:2.5.0-b42"
 
     // Log
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
+    compile "org.apache.logging.log4j:log4j-api:2.11.1"
+    compile "org.apache.logging.log4j:log4j-core:2.11.1"
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
 
     // Database related component
     compile "mysql:mysql-connector-java:8.0.12"
@@ -74,4 +75,10 @@ flyway {
 
 // Define the main class for the application
 mainClassName = 'App'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'net.rim99.demo.account.App'
+    }
+}
 

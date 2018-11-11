@@ -1,6 +1,7 @@
 package net.rim99.demo.account.support.repository;
 
 import com.google.inject.Injector;
+import net.rim99.demo.account.support.guice.GlobalInjector;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public class GuiceObjectFactory extends DefaultObjectFactory {
 
     private synchronized void initInjector() {
         if (injector != null) return;
-        injector = Repositories.getFactory().injector;
+        injector = GlobalInjector.getInjector();
     }
 }

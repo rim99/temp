@@ -1,7 +1,10 @@
+package net.rim99.demo.account;
+
 import net.rim99.demo.account.repository.Mybatis;
+import net.rim99.demo.account.resource.Resource;
 import net.rim99.demo.account.startup.Config;
 import net.rim99.demo.account.support.ServerManager;
-import net.rim99.demo.account.support.repository.Repositories;
+import net.rim99.demo.account.support.guice.GlobalInjector;
 import net.rim99.demo.account.support.config.ConfigManager;
 
 /*
@@ -10,8 +13,8 @@ import net.rim99.demo.account.support.config.ConfigManager;
 public class App {
     public static void main(String[] args) {
         ConfigManager.initialize(Config.register());
-        Repositories.initializeFactory(Mybatis.getModule());
+        GlobalInjector.builder().addModule(Mybatis.getModule());
         ServerManager startup = new ServerManager();
-        startup.start(ConfigManager.get());
+        startup.start(ConfigManager.get(), Resource.config());
     }
 }

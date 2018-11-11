@@ -1,6 +1,6 @@
 package net.rim99.demo.account.repository;
 
-import net.rim99.demo.account.support.repository.Repositories;
+import net.rim99.demo.account.support.guice.GlobalInjector;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -14,7 +14,7 @@ public abstract class RepositoryTest {
 
     @BeforeClass
     public static void setUp() {
-        Repositories.initializeFactory(Mybatis.getModule());
+        GlobalInjector.builder().addModule(Mybatis.getModule());
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://localhost:8801/account_test?" +
@@ -29,5 +29,6 @@ public abstract class RepositoryTest {
     public static void tearDown() throws SQLException {
         conn.prepareStatement("delete from PERSON;").execute();
         conn.close();
+        GlobalInjector.clear();
     }
 }
