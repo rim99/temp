@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GuiceObjectFactory extends DefaultObjectFactory {
 
-    private Injector injector;
+    private volatile Injector injector;
 
     @Override
     public <T> T create(Class<T> type, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class GlobalInjector {
 
-    private static Injector injector;
+    private static volatile Injector injector;
 
     public static Injector getInjector() {
         assertInjectorCreated();

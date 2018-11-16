@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ConfigManager {
 
-    private static ConfigManager manager = null;
+    private static volatile ConfigManager manager = null;
 
     public static synchronized void initialize(ConfigRegister register) {
         if (manager == null) {
