@@ -6,79 +6,68 @@
  * user guide available at https://docs.gradle.org/4.3.1/userguide/tutorial_java_projects.html
  */
 
-buildscript {
-    dependencies {
-        classpath "mysql:mysql-connector-java:8.0.12"
-    }
-}
 
 plugins {
     id 'java' // Apply the java plugin to add support for Java
     id 'application' // Apply the application plugin to add support for building an application
     id 'idea' // optional (to generate IntelliJ IDEA project files)
-    id "org.flywaydb.flyway" version "5.2.0"
 }
 
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-    jcenter()
-}
+subprojects {
+    apply plugin: 'java'
+    group = 'net.rim99.demo'
+    version = '1.0'
 
-dependencies {
-    // Server related component
-    compile "javax.annotation:javax.annotation-api:1.2"
-    compile "javax.inject:javax.inject:1"
-    compile "javax.validation:validation-api:1.1.0.Final"
-    compile "javax.ws.rs:javax.ws.rs-api:2.1"
-    compile "org.glassfish.jersey.core:jersey-common:2.27"
-    compile "org.glassfish.jersey.core:jersey-server:2.27"
-    compile "org.glassfish.jersey.containers:jersey-container-jetty-servlet:2.27"
-    compile "org.glassfish.jersey.inject:jersey-hk2:2.27"
-    compile "org.eclipse.jetty:jetty-project:9.4.12.v20180830"
-
-    // Data serialization
-    compile "com.fasterxml.jackson.core:jackson-databind:2.9.7"
-    // Configuration management
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2"
-
-    // Dependencies inject
-    compile "com.google.inject:guice:4.1.0"
-    compile "org.glassfish.hk2:guice-bridge:2.5.0-b42"
-
-    // Log
-    compile "org.apache.logging.log4j:log4j-api:2.11.1"
-    compile "org.apache.logging.log4j:log4j-core:2.11.1"
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
-
-    // Database related component
-    compile "mysql:mysql-connector-java:8.0.12"
-    compile "org.mybatis:mybatis:3.4.6"
-    compile "org.mybatis:mybatis-guice:3.10"
-    compile "com.zaxxer:HikariCP:3.1.0"
-
-    // Use JUnit test framework
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.11.1'
-
-    // Integration test
-    testCompile "io.rest-assured:rest-assured:3.1.1"
-}
-
-flyway {
-    url = "jdbc:mysql://localhost:8801/account_test"
-    user = 'mysql'
-    password = 'mysql'
-}
-
-// Define the main class for the application
-mainClassName = 'App'
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'net.rim99.demo.account.App'
+    repositories {
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        jcenter()
     }
 }
 
+project(':microservice') {
+    dependencies {
+        // Server related component
+        compile "javax.annotation:javax.annotation-api:1.2"
+        compile "javax.inject:javax.inject:1"
+        compile "javax.validation:validation-api:1.1.0.Final"
+        compile "javax.ws.rs:javax.ws.rs-api:2.1"
+        compile "org.glassfish.jersey.core:jersey-common:2.27"
+        compile "org.glassfish.jersey.core:jersey-server:2.27"
+        compile "org.glassfish.jersey.containers:jersey-container-jetty-servlet:2.27"
+        compile "org.glassfish.jersey.inject:jersey-hk2:2.27"
+        compile "org.eclipse.jetty:jetty-project:9.4.12.v20180830"
+
+        // Data serialization
+        compile "com.fasterxml.jackson.core:jackson-databind:2.9.7"
+        // Configuration management
+        compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2"
+
+        // Dependencies inject
+        compile "com.google.inject:guice:4.1.0"
+        compile "org.glassfish.hk2:guice-bridge:2.5.0-b42"
+
+        // Log
+        compile "org.apache.logging.log4j:log4j-api:2.11.1"
+        compile "org.apache.logging.log4j:log4j-core:2.11.1"
+        compile "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
+
+        // Database related component
+        compile "mysql:mysql-connector-java:8.0.12"
+        compile "org.mybatis:mybatis:3.4.6"
+        compile "org.mybatis:mybatis-guice:3.10"
+        compile "com.zaxxer:HikariCP:3.1.0"
+
+        // Use JUnit test framework
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.assertj:assertj-core:3.11.1'
+
+        // Integration test
+        testCompile "io.rest-assured:rest-assured:3.1.1"
+    }
+}
+
+project(':demo') {
+    dependencies {
+        implementation project(':microservice')
+    }
+}
