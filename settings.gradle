@@ -17,3 +17,12 @@ include 'services:webservice'
 
 rootProject.name = 'account-demo'
 include "microservice"
+include "demo"
+include 'rabbitmq'
+include 'service:account'
+findProject(':service:account')?.name = 'account'
+include 'service:commodity'
+findProject(':service:commodity')?.name = 'commodity'
+include 'service:identity'
+findProject(':service:identity')?.name = 'identity'
+

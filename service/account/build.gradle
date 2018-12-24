@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':microservice')
+    compile 'io.lettuce:lettuce-core:5.1.3.RELEASE' // Redis TODO move to another module
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
